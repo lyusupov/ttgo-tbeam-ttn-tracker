@@ -1,4 +1,4 @@
-# Port of T-Beam TTN Mapper for TTGO T-Motion
+# Port of [T-Beam TTN Mapper](https://github.com/kizniche/ttgo-tbeam-ttn-tracker) for TTGO T-Motion
 
 Author: **Linar Yusupov**
 
