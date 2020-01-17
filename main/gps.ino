@@ -29,7 +29,15 @@ uint8_t sats;
 char t[32]; // used to sprintf for Serial output
 
 TinyGPSPlus _gps;
+
+#if defined(ESP32)
 HardwareSerial _serial_gps(GPS_SERIAL_NUM);
+#elif defined(ARDUINO_ARCH_STM32)
+HardwareSerial Serial4(GPS_RX_PIN, GPS_TX_PIN);
+#define _serial_gps Serial4
+#else
+#error "This hardware platform is not supported!"
+#endif
 
 void gps_time(char * buffer, uint8_t size) {
     snprintf(buffer, size, "%02d:%02d:%02d", _gps.time.hour(), _gps.time.minute(), _gps.time.second());
@@ -56,7 +64,52 @@ uint8_t gps_sats() {
 }
 
 void gps_setup() {
+#if defined(ESP32)
     _serial_gps.begin(GPS_BAUDRATE, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
+#elif defined(ARDUINO_ARCH_STM32)
+    _serial_gps.begin(GPS_BAUDRATE, SERIAL_8N1);
+#else
+#error "This hardware platform is not supported!"
+#endif
+
+#ifdef T_MOTION
+  /* drive GNSS RST pin low */
+  pinMode(GPS_RST_PIN, OUTPUT);
+  digitalWrite(GPS_RST_PIN, LOW);
+
+  /* activate 1.8V<->3.3V level shifters */
+  pinMode(GPS_LS_PIN,  OUTPUT);
+  digitalWrite(GPS_LS_PIN,  HIGH);
+
+  /* keep RST low to ensure proper IC reset */
+  delay(200);
+
+  /* release */
+  digitalWrite(GPS_RST_PIN, HIGH);
+
+  /* give Sony GNSS few ms to warm up */
+  delay(100);
+
+  /* Leave pin floating */
+  pinMode(GPS_RST_PIN, INPUT);
+
+  // _serial_gps.write("@VER\r\n");
+
+  /* Idle */
+  // _serial_gps.write("@GSTP\r\n");      delay(250);
+
+  /* GGA + GSA + RMC */
+  _serial_gps.write("@BSSL 0x25\r\n"); delay(250);
+  /* GPS + GLONASS */
+  _serial_gps.write("@GNS 0x3\r\n");   delay(250);
+
+  // _serial_gps.write("@GSW\r\n"); /* warm start */
+  // _serial_gps.write("@GSR\r\n"); /* hot  start */
+  _serial_gps.write("@GCD\r\n"); /* cold start */
+
+  delay(250);
+#endif
+
 }
 
 static void gps_loop() {

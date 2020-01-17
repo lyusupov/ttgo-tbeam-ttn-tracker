@@ -134,7 +134,18 @@ void ttn_response(uint8_t * buffer, size_t len) {
 
 bool ttn_setup() {
     // SPI interface
+#if defined(ESP32)
     SPI.begin(SCK_GPIO, MISO_GPIO, MOSI_GPIO, NSS_GPIO);
+#elif defined(ARDUINO_ARCH_STM32)
+    SPI.setMISO(MISO_GPIO);
+    SPI.setMOSI(MOSI_GPIO);
+    SPI.setSCLK(SCK_GPIO);
+    // Slave Select pin is driven by RF driver
+
+    SPI.begin();
+#else
+#error "This hardware platform is not supported!"
+#endif
 
     // LMIC init
     return ( 1 == os_init_ex( (const void *) &lmic_pins ) );

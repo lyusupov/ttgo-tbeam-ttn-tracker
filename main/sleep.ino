@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+#if defined(ESP32)
 #include <esp_sleep.h>
 
 void sleep_interrupt(uint8_t gpio, uint8_t mode) {
@@ -42,3 +43,12 @@ void sleep_seconds(uint32_t seconds) {
 void sleep_forever() {
     esp_deep_sleep_start();
 }
+
+#elif defined(ARDUINO_ARCH_STM32)
+
+void sleep_forever() {
+    LowPower_shutdown();
+}
+#else
+#error "This hardware platform is not supported!"
+#endif

@@ -40,8 +40,9 @@ void ttn_register(void (*callback)(uint8_t message));
 // -----------------------------------------------------------------------------
 
 // Select which T-Beam board is being used. Only uncomment one.
-#define T_BEAM_V07  // AKA Rev0 (first board released)
+// #define T_BEAM_V07  // AKA Rev0 (first board released)
 // #define T_BEAM_V10  // AKA Rev1 (second board released)
+#define T_MOTION
 
 // Select the payload format. Change on TTN as well. Only uncomment one.
 #define PAYLOAD_USE_FULL
@@ -89,14 +90,22 @@ void ttn_register(void (*callback)(uint8_t message));
 // General
 // -----------------------------------------------------------------------------
 
+#if !defined(T_MOTION)
 #define I2C_SDA         21
 #define I2C_SCL         22
 #define LED_PIN         14
+#else
+#define I2C_SDA         PB7
+#define I2C_SCL         PB6
+#define LED_PIN         PA0
+#endif
 
 #if defined(T_BEAM_V07)
 #define BUTTON_PIN      39
 #elif defined(T_BEAM_V10)
 #define BUTTON_PIN      38
+#elif defined(T_MOTION)
+#define BUTTON_PIN      PA8
 #endif
 
 // -----------------------------------------------------------------------------
@@ -109,8 +118,13 @@ void ttn_register(void (*callback)(uint8_t message));
 // GPS
 // -----------------------------------------------------------------------------
 
+#if !defined(T_MOTION)
 #define GPS_SERIAL_NUM  1
 #define GPS_BAUDRATE    9600
+#else
+#define GPS_SERIAL_NUM  4
+#define GPS_BAUDRATE    115200
+#endif
 #define USE_GPS         1
 
 #if defined(T_BEAM_V07)
@@ -119,12 +133,18 @@ void ttn_register(void (*callback)(uint8_t message));
 #elif defined(T_BEAM_V10)
 #define GPS_RX_PIN      34
 #define GPS_TX_PIN      12
+#elif defined(T_MOTION)
+#define GPS_RX_PIN      PC11
+#define GPS_TX_PIN      PC10
+#define GPS_RST_PIN     PB2
+#define GPS_LS_PIN      PC6
 #endif
 
 // -----------------------------------------------------------------------------
 // LoRa SPI
 // -----------------------------------------------------------------------------
 
+#if !defined(T_MOTION)
 #define SCK_GPIO        5
 #define MISO_GPIO       19
 #define MOSI_GPIO       27
@@ -133,6 +153,16 @@ void ttn_register(void (*callback)(uint8_t message));
 #define DIO0_GPIO       26
 #define DIO1_GPIO       33
 #define DIO2_GPIO       32
+#else
+#define SCK_GPIO        PB13
+#define MISO_GPIO       PB14
+#define MOSI_GPIO       PB15
+#define NSS_GPIO        PB12
+#define RESET_GPIO      PB10
+#define DIO0_GPIO       PB11
+#define DIO1_GPIO       PC13
+#define DIO2_GPIO       PB9
+#endif
 
 // -----------------------------------------------------------------------------
 // AXP192 (Rev1-specific options)

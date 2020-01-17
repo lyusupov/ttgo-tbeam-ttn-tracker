@@ -22,7 +22,13 @@
 */
 
 #include "configuration.h"
+#if defined(ESP32)
 #include "rom/rtc.h"
+#elif defined(ARDUINO_ARCH_STM32)
+#define RTC_DATA_ATTR
+#else
+#error "This hardware platform is not supported!"
+#endif
 #include <TinyGPS++.h>
 #include <Wire.h>
 
