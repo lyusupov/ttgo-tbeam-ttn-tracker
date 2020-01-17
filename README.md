@@ -1,3 +1,35 @@
+# Port of T-Beam TTN Mapper for TTGO T-Motion
+
+Author: **Linar Yusupov**
+
+Libraries:
+
+   * [mcci-catena/arduino-lmic](https://github.com/mcci-catena/arduino-lmic)
+   * [mikalhart/TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)
+   * [ThingPulse/esp8266-oled-ssd1306](https://github.com/lyusupov/esp8266-oled-ssd1306)
+
+You should have [**STM32CubeProg**](https://www.st.com/en/development-tools/stm32cubeprog.html) been pre-installed in order to program your T-Motion.<br>
+Press **BOOT** button on your T-Motion board, plug it into a PC/laptop USB slot, then release.<br>
+
+1. Follow [these official instructions](https://github.com/stm32duino/wiki/wiki/Getting-Started)
+  to install Arduino IDE and [latest **stable** Arduino STM32 Core](https://github.com/stm32duino/Arduino_Core_STM32/releases/tag/1.8.0) (1.8.0)
+2. start **Arduino** application
+3. open **main** sketch from _File_ -> _Open_ menu
+4. Select _Tools_ -> _Board_ ->  _Nucleo_64_<br>
+5. Select _Tools_ -> _Optimize_ ->  _Fast_ _(-O1)_
+6. Select _Tools_ -> _Board_ _part_ _number_ ->  _Nucleo_ _L073RZ_<br>
+7. Select _Tools_ -> _C_ _Runtime_ _library_ ->  _Newlib_ _Nano_ _+_ _Float_ _Printf_
+8. Select _Tools_ -> _USB_ _speed_ _(if available)_ ->  _Low/Full_ _Speed_
+9. Select _Tools_ -> _USB_ _support_ _(if available)_ ->  _CDC_ _(generic_ _'Serial'_ _supersede_ _U(S)ART)_
+10. Select _Tools_ -> _U(S)ART_ _support_ ->  _Enabled_ _(no_ _generic_ _'Serial')_
+11. Select _Tools_ -> _Upload_ _method_ ->  _STM32CubeProgrammer_ _(DFU)_
+12. Select _Tools_ -> _Port_ ->  ``<your Dongle's DFU device name>``
+13. Build and upload the sketch using _Sketch_ -> _Upload_
+
+below are genuine instructions for TTGO T-Beam. Use them as an additional source of information:
+
+------------------
+
 ## TTGO T-Beam Tracker for The Things Network
 
 Uploads GPS data from the TTGO T-Beam to [The Things Network](https://www.thethingsnetwork.org) (TTN) and [TTN Mapper](https://ttnmapper.org) for tracking and determining signal strength of LoRaWAN gateways and nodes.
@@ -58,19 +90,3 @@ function Decoder(bytes, port) {
 ### TTN Tracker
 
 I also developed [The Things Network Tracker (TTN-Tracker)](https://github.com/kizniche/ttn-tracker), a web app that pulls GPS data from TTN and displays it on a map in real-time (TTN Mapper is not real-time) that can be displayed on your phone, tablet, or computer. This is handy for testing signal range while driving, as you can see location points appearing under your moving location dot on the map (if you grant location sharing permissions to the web app) when a successful transmission has been achieved.
-
-### T-BEAM Board Versions
-
-#### Rev0
-
-![TTGO T-Beam 01](img/TTGO-TBeam-01.jpg)
-
-![TTGO T-Beam 02](img/TTGO-TBeam-02.jpg)
-
-![TTGO T-Beam 03](img/TTGO-TBeam-03.jpg)
-
-#### Rev1
-
-![T-BEAM-Rev1-01](img/T-BEAM-Rev1-01.jpg)
-
-![T-BEAM-Rev1-02](img/T-BEAM-Rev1-02.jpg)
