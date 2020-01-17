@@ -8,6 +8,12 @@ Libraries:
    * [mikalhart/TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)
    * [ThingPulse/esp8266-oled-ssd1306](https://github.com/ThingPulse/esp8266-oled-ssd1306)
 
+Patches:
+
+   * [arduino-lmic STM32 IRQ fix](https://github.com/lyusupov/ttgo-tmotion-ttn-tracker/blob/master/patch/arduino-lmic-stm32-patch.txt)
+
+## Build instructions
+
 You should have [**STM32CubeProg**](https://www.st.com/en/development-tools/stm32cubeprog.html) been pre-installed in order to program your T-Motion.<br>
 Press **BOOT** button on your T-Motion board, plug it into a PC/laptop USB slot, then release.<br>
 
