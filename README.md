@@ -6,7 +6,7 @@ Libraries:
 
    * [mcci-catena/arduino-lmic](https://github.com/mcci-catena/arduino-lmic)
    * [mikalhart/TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus)
-   * [ThingPulse/esp8266-oled-ssd1306](https://github.com/lyusupov/esp8266-oled-ssd1306)
+   * [ThingPulse/esp8266-oled-ssd1306](https://github.com/ThingPulse/esp8266-oled-ssd1306)
 
 You should have [**STM32CubeProg**](https://www.st.com/en/development-tools/stm32cubeprog.html) been pre-installed in order to program your T-Motion.<br>
 Press **BOOT** button on your T-Motion board, plug it into a PC/laptop USB slot, then release.<br>
