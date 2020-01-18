@@ -1,6 +1,8 @@
 # Port of [T-Beam TTN Mapper](https://github.com/kizniche/ttgo-tbeam-ttn-tracker) for TTGO T-Motion
 
-Author: **Linar Yusupov**
+Adapted by **Linar Yusupov**
+
+![](https://github.com/lyusupov/ttgo-tmotion-ttn-tracker/raw/master/img/t-motion-42.jpg)
 
 Libraries:
 
@@ -11,6 +13,8 @@ Libraries:
 Patches:
 
    * [arduino-lmic STM32 IRQ fix](https://github.com/lyusupov/ttgo-tmotion-ttn-tracker/blob/master/patch/arduino-lmic-stm32-patch.txt)
+
+**Notice**: Use of **ABP** TTN connection method is recommended.
 
 ## Build instructions
 
@@ -32,7 +36,14 @@ Press **BOOT** button on your T-Motion board, plug it into a PC/laptop USB slot,
 12. Select _Tools_ -> _Port_ ->  ``<your Dongle's DFU device name>``
 13. Build and upload the sketch using _Sketch_ -> _Upload_
 
-below are genuine instructions for TTGO T-Beam. Use them as an additional source of information:
+## T-Motion
+
+![](https://github.com/Xinyuan-LilyGO/LilyGO-T-Motion/raw/master/Image/1.jpg)
+
+<br>
+<br>
+
+Below are genuine instructions for TTGO T-Beam. Use them as an additional source of information:
 
 ------------------
 
