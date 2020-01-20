@@ -1,4 +1,4 @@
-# Port of [T-Beam TTN Mapper](https://github.com/kizniche/ttgo-tbeam-ttn-tracker) for TTGO T-Motion
+# Port of [T-Beam TTN Mapper](https://github.com/kizniche/ttgo-tbeam-ttn-tracker) for [TTGO T-Motion](https://github.com/lyusupov/ttgo-tmotion-ttn-tracker/wiki/Bill-of-materials)
 
 Adapted by **Linar Yusupov**
 
@@ -36,7 +36,7 @@ Press **BOOT** button on your T-Motion board, plug it into a PC/laptop USB slot,
 12. Select _Tools_ -> _Port_ ->  ``<your Dongle's DFU device name>``
 13. Build and upload the sketch using _Sketch_ -> _Upload_
 
-## T-Motion
+## [T-Motion](https://github.com/lyusupov/ttgo-tmotion-ttn-tracker/wiki/Bill-of-materials)
 
 ![](https://github.com/Xinyuan-LilyGO/LilyGO-T-Motion/raw/master/Image/1.jpg)
 
