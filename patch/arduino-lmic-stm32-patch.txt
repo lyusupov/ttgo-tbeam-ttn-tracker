@@ -1,8 +1,8 @@
 diff --git a/src/hal/hal.cpp b/src/hal/hal.cpp
-index 7791c20..ac24669 100644
+index 6e72a58..0b5cddd 100644
 --- a/src/hal/hal.cpp
 +++ b/src/hal/hal.cpp
-@@ -284,6 +284,31 @@ u1_t hal_checkTimer (u4_t time) {
+@@ -334,6 +334,31 @@ u1_t hal_checkTimer (u4_t time) {
      return delta_time(time) <= 0;
  }
  
@@ -26,7 +26,7 @@ index 7791c20..ac24669 100644
 +}
 +
 +void hal_enableIRQs () {
-+    hal_io_check();
++    hal_pollPendingIRQs_helper();
 +}
 +
 +#else /* ARDUINO_ARCH_STM32 */
@@ -34,7 +34,7 @@ index 7791c20..ac24669 100644
  static uint8_t irqlevel = 0;
  
  void hal_disableIRQs () {
-@@ -311,6 +336,8 @@ uint8_t hal_getIrqLevel(void) {
+@@ -365,6 +390,8 @@ uint8_t hal_getIrqLevel(void) {
      return irqlevel;
  }
  
